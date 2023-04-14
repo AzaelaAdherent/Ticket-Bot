@@ -1,0 +1,12 @@
+[
+  {
+    "name": "help",
+    "description": "get some help",
+    "dm_permission": false
+  },
+  {
+    "name": "create",
+    "description": "create a new ticket",
+    "dm_permission": false
+  }
+]
