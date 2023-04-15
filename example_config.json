@@ -3,9 +3,9 @@
   "ownerId": "",
   "guildId": "",
   "botId": "",
+  "ticketCategoryId": "",
   "mongo": {
     "url": "mongodb://127.0.0.1:27017",
-    "db": "TicketBot",
-    "ticket_collection": "myTickets"
+    "db": "TicketBot"
   }
 }
