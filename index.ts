@@ -6,8 +6,7 @@ import {
   Interaction,
   Message,
 } from "discord.js";
-import { MongoClient } from 'mongodb';
-import { isTicket } from './tickets';
+import { isTicket, addMessage } from './tickets';
 const fs = require('fs');
 
 async function getConfig() {
@@ -46,8 +45,7 @@ client.once('ready', async () => {
     // check if it's an open ticket channel
     let search = await isTicket(message.channel.id)
     if (search !== null) {
-      // console.log(search);
-      // console.log(message);
+      addMessage(message);
     }
 
   });

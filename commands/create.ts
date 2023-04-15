@@ -20,6 +20,7 @@ module.exports.run = async (interaction: CommandInteraction, client: Client) => 
   })
   .then(channel => {
     createTicket(interaction.user.id, new Date, channel.id, channel.name);
+    interaction.editReply(`Ticket successfully created! <#${channel.id}>`);
   });
   
 }
