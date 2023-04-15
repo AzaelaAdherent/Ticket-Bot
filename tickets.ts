@@ -17,10 +17,11 @@ export async function createTicket(userid: string, date: Date, channelid: string
   const collection = client.db(db).collection('OpenTickets');
 
   collection.insertOne({
-    userid: userid,
+    created_by: userid,
     date_created: date,
     channelid: channelid,
-    channelname: channelname
+    channelname: channelname,
+    messages: []
   }).catch(err => {
     console.error(err);
   });
@@ -32,9 +33,27 @@ export async function updateTicket() {
   
 }
 
-export async function deleteTicket() {
+export async function deleteTicket(userid: string, date: Date, channelid: string, reason: string) {
   await client.connect();
   const collection = client.db(db).collection('OpenTickets');
+
+  console.log('deleting..');
+
+  collection.updateOne( { channelid: channelid }, { $set: { date_deleted: date, deleted_by: userid, reason: reason } } );
+
+  collection.aggregate([
+    { $match: { channelid: channelid } },
+    { $merge: "DeletedTickets" }
+  ], { allowDiskUse: true, cursor: { batchSize: 0 } }).toArray().then((result) => {
+    console.log(`${result.length} documents moved to DeletedTickets collection.`);
+    collection.deleteMany({ channelid: channelid }).then((deleteResult) => {
+      console.log(`${deleteResult.deletedCount} documents deleted from original collection.`);
+    }).catch((deleteErr) => {
+      console.error("Error deleting documents from original collection:", deleteErr);
+    });
+  }).catch((err) => {
+    console.error("Error moving documents:", err);
+  });
   
 }
 

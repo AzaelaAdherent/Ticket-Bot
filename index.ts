@@ -46,8 +46,8 @@ client.once('ready', async () => {
     // check if it's an open ticket channel
     let search = await isTicket(message.channel.id)
     if (search !== null) {
-      console.log(search);
-      console.log(message);
+      // console.log(search);
+      // console.log(message);
     }
 
   });

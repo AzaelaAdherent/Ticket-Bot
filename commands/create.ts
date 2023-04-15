@@ -7,7 +7,7 @@ async function getConfig() {
 }
 
 module.exports.run = async (interaction: CommandInteraction, client: Client) => {
-  interaction.reply("Working...");
+  await interaction.deferReply({ ephemeral: true });
 
   let config = await getConfig();
 

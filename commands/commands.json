@@ -8,5 +8,18 @@
     "name": "create",
     "description": "create a new ticket",
     "dm_permission": false
+  },
+  {
+    "name": "delete",
+    "description": "delete a ticket",
+    "dm_permission": false,
+    "options": [
+      {
+        "name": "reason",
+        "type": 3,
+        "description": "reason for deletion",
+        "require": false
+      }
+    ]
   }
 ]
